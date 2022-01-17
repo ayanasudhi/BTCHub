@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class BTCGraphPage extends StatefulWidget {
-  const BTCGraphPage({Key key}) : super(key: key);
+  const BTCGraphPage({Key? key}) : super(key: key);
 
   @override
   _BTCGraphPageState createState() => _BTCGraphPageState();
@@ -12,7 +12,7 @@ class BTCGraphPage extends StatefulWidget {
 class _BTCGraphPageState extends State<BTCGraphPage> {
 
   // List<ChartSampleData> _chartData;
-   TrackballBehavior _trackballBehavior;
+   TrackballBehavior? _trackballBehavior;
 
   @override
   void initState() {

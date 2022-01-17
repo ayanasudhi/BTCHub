@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/core/livedata/ui_state.dart';
 
 class LiveData<T extends UIState> with ChangeNotifier{
-  T value;
+  T? value;
 
   void setValue (T value){
     this.value = value;
@@ -10,7 +10,7 @@ class LiveData<T extends UIState> with ChangeNotifier{
   }
 
   UIState getValue(){
-    return this.value;
+    return this.value!;
   }
 
 }

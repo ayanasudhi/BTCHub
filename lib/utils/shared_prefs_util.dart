@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsUtil {
@@ -9,7 +8,7 @@ class SharedPrefsUtil {
   static final SharedPrefsUtil prefsInstance = SharedPrefsUtil._();
 
   Future<SharedPreferences> _sprefs = SharedPreferences.getInstance();
-  Map<String,dynamic> _prefsMap;
+  Map<String,dynamic>? _prefsMap;
 
 
   void saveIntToPrefs(String key, int value) async {
@@ -64,19 +63,19 @@ class SharedPrefsUtil {
     final pref = await _sprefs;
     _prefsMap =  new HashMap();
 
-    _prefsMap['UserName'] = pref.get(key) ?? "---";
-    _prefsMap['PassWord'] = pref.get(key) ?? "---";
-    _prefsMap['UserType'] = pref.get(key) ?? "---";
-    _prefsMap['MemberId'] = pref.get(key) ?? "---";
-    _prefsMap['ThemeName'] = pref.get(key) ?? "---";
-    _prefsMap['LocaleName'] = pref.get(key) ?? "---";
-    _prefsMap['RememberMe'] = pref.get(key) ?? false;
-    _prefsMap['UseBiometric'] = pref.get(key) ?? false;
+    _prefsMap!['UserName'] = pref.get(key) ?? "---";
+    _prefsMap!['PassWord'] = pref.get(key) ?? "---";
+    _prefsMap!['UserType'] = pref.get(key) ?? "---";
+    _prefsMap!['MemberId'] = pref.get(key) ?? "---";
+    _prefsMap!['ThemeName'] = pref.get(key) ?? "---";
+    _prefsMap!['LocaleName'] = pref.get(key) ?? "---";
+    _prefsMap!['RememberMe'] = pref.get(key) ?? false;
+    _prefsMap!['UseBiometric'] = pref.get(key) ?? false;
 
 
 
 
-    return _prefsMap[key];
+    return _prefsMap![key];
   }
 
 
@@ -93,7 +92,7 @@ class SharedPrefsUtil {
     return strValue;
   }
 
-  void saveThemeNameToPref({@required String themeName}) async{
+  void saveThemeNameToPref({required String themeName}) async{
     final pref = await _sprefs;
     pref.setString('ThemeName', themeName);
     pref.commit();
@@ -110,7 +109,7 @@ class SharedPrefsUtil {
     return strValue;
   }
 
-  void saveLocaleNameToPref({@required String localeName}) async{
+  void saveLocaleNameToPref({required String localeName}) async{
     final pref = await _sprefs;
     pref.setString('LocaleName', localeName);
     pref.commit();

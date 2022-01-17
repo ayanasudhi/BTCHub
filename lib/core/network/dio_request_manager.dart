@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'i_api_request_manager.dart';
 
 class DioRequestManager extends IApiRequestManager{
   static final _baseUrl = 'https://api1.binance.com';
   final _connectionTimeout = 50000;
   final _receiveTimeout = 30000;
-  Dio _dio;
+  late Dio _dio;
 
   DioRequestManager() {
     BaseOptions options = new BaseOptions(
@@ -87,7 +86,7 @@ class DioRequestManager extends IApiRequestManager{
   }
 
   @override
-  Future<dynamic> getRequest({@required String path, Map<String, dynamic> parameters}) async {
+  Future<dynamic> getRequest({required String path, Map<String, dynamic>? parameters}) async {
     try {
       final response = await _dio.get(path, queryParameters: parameters);
       return response.data;
@@ -97,7 +96,7 @@ class DioRequestManager extends IApiRequestManager{
   }
 
   @override
-  Future<dynamic> postRequest({@required String path, Map<String, dynamic> parameters, body}) async {
+  Future<dynamic> postRequest({required String path, Map<String, dynamic>? parameters, body}) async {
     try {
       final response = await _dio.post(path, data: body);
       print('------ $response');

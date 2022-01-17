@@ -6,18 +6,17 @@ import 'package:flutter_app/data/btc/models/btc_request_model.dart';
 class BTCApiClient {
   final IApiRequestManager requestManager;
 
-  BTCApiClient({@required this.requestManager})
-      : assert(requestManager != null);
+  BTCApiClient({required this.requestManager});
 
   Future<dynamic> fetchBTCData(BTCRequestModel requestModel) async {
     final result =
         await requestManager.getRequest(path: '/api/v3/klines', //path after base url,
             parameters: {
-          'symbol': requestModel?.symbol,
-          'interval': requestModel?.interval,
-          'startTime': requestModel?.startTime,
-          'endTime': requestModel?.endTime,
-          'limit': requestModel?.limit
+          'symbol': requestModel.symbol,
+          'interval': requestModel.interval,
+          'startTime': requestModel.startTime,
+          'endTime': requestModel.endTime,
+          'limit': requestModel.limit
         });
     return btcDataModelFromJson(result);
   }
