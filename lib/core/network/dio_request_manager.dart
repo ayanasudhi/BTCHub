@@ -87,7 +87,7 @@ class DioRequestManager extends IApiRequestManager{
   }
 
   @override
-  Future<dynamic> getRequest({@required String path, Map<String, String> parameters}) async {
+  Future<dynamic> getRequest({@required String path, Map<String, dynamic> parameters}) async {
     try {
       final response = await _dio.get(path, queryParameters: parameters);
       return response.data;
@@ -97,7 +97,7 @@ class DioRequestManager extends IApiRequestManager{
   }
 
   @override
-  Future<dynamic> postRequest({@required String path, Map<String, String> parameters, body}) async {
+  Future<dynamic> postRequest({@required String path, Map<String, dynamic> parameters, body}) async {
     try {
       final response = await _dio.post(path, data: body);
       print('------ $response');
