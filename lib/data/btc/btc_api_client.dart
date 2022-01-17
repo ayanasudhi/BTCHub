@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/core/network/i_api_request_manager.dart';
-import 'package:flutter_app/data/btc/models/btc_data_model.dart';
+import 'package:flutter_app/data/btc/models/btc_response_model.dart';
 import 'package:flutter_app/data/btc/models/btc_request_model.dart';
 
 class BTCApiClient {
