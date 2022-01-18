@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class FadeRoute extends PageRouteBuilder {
   final Widget page;
-  FadeRoute({this.page})
+  FadeRoute({required this.page})
       : super(
     pageBuilder: (
         BuildContext context,
@@ -28,7 +28,7 @@ class FadeRoute extends PageRouteBuilder {
 // scale
 class ScaleRoute extends PageRouteBuilder {
   final Widget page;
-  ScaleRoute({this.page}) : super(opaque : false,
+  ScaleRoute({required this.page}) : super(opaque : false,
     pageBuilder: (
         BuildContext context,
         Animation<double> animation,
@@ -59,7 +59,7 @@ class ScaleRoute extends PageRouteBuilder {
 // size
 class SizeRoute extends PageRouteBuilder {
   final Widget page;
-  SizeRoute({this.page})
+  SizeRoute({required this.page})
       : super(
     pageBuilder: (
         BuildContext context,
@@ -85,7 +85,7 @@ class SizeRoute extends PageRouteBuilder {
 //slide right
 class SlideRightRoute extends PageRouteBuilder {
   final Widget page;
-  SlideRightRoute({this.page})
+  SlideRightRoute({required this.page})
       : super(
     pageBuilder: (
         BuildContext context,
@@ -113,7 +113,7 @@ class SlideRightRoute extends PageRouteBuilder {
 //slide up
 class SlideUpRoute extends PageRouteBuilder {
   final Widget page;
-  SlideUpRoute({this.page})
+  SlideUpRoute({required this.page})
       : super(opaque:false,
     pageBuilder: (
         BuildContext context,
@@ -141,7 +141,7 @@ class SlideUpRoute extends PageRouteBuilder {
 //rotaion
 class RotationRoute extends PageRouteBuilder {
   final Widget page;
-  RotationRoute({this.page})
+  RotationRoute({required this.page})
       : super(
     pageBuilder: (
         BuildContext context,

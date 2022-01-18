@@ -7,9 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
 class NetworkImageSSL extends ImageProvider<NetworkImageSSL> {
-  const NetworkImageSSL(this.url, {this.scale = 1.0, this.headers})
-      : assert(url != null),
-        assert(scale != null);
+  const NetworkImageSSL(this.url, {this.scale = 1.0,required this.headers});
 
   final String url;
 
@@ -35,13 +33,13 @@ class NetworkImageSSL extends ImageProvider<NetworkImageSSL> {
 
     final Uri resolved = Uri.base.resolve(key.url);
     final HttpClientRequest request = await _httpClient.getUrl(resolved);
-    headers?.forEach((String name, String value) {
+    headers.forEach((String name, String value) {
       request.headers.add(name, value);
     });
     final HttpClientResponse response = await request.close();
     if (response.statusCode != HttpStatus.ok)
       throw new Exception(
-          'HTTP request failed, statusCode: ${response?.statusCode}, $resolved');
+          'HTTP request failed, statusCode: ${response.statusCode}, $resolved');
 
     final Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     if (bytes.lengthInBytes == 0)
