@@ -295,12 +295,13 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                                       MajorTickLines(color: Colors.transparent),
                                   majorGridLines: MajorGridLines(width: 0)),
                               primaryYAxis: NumericAxis(
-                                axisLine: AxisLine(color: Colors.transparent),
-                                majorGridLines:
-                                    MajorGridLines(color: Colors.white30),
-                                majorTickLines:
-                                    MajorTickLines(color: Colors.transparent),
-                              ),
+                                  axisLine: AxisLine(color: Colors.transparent),
+                                  majorGridLines:
+                                      MajorGridLines(color: Colors.white30),
+                                  majorTickLines:
+                                      MajorTickLines(color: Colors.transparent),
+                                  numberFormat: NumberFormat.simpleCurrency(
+                                      decimalDigits: 1)),
                             ),
                           ),
 
@@ -339,13 +340,12 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                                   majorGridLines: MajorGridLines(
                                       width: 0, color: Colors.amber)),
                               primaryYAxis: NumericAxis(
-                                  axisLine: AxisLine(color: Colors.transparent),
-                                  majorGridLines:
-                                      MajorGridLines(color: Colors.transparent),
-                                  majorTickLines:
-                                      MajorTickLines(color: Colors.transparent),
-                                  numberFormat: NumberFormat.simpleCurrency(
-                                      decimalDigits: 0)),
+                                axisLine: AxisLine(color: Colors.transparent),
+                                majorGridLines:
+                                    MajorGridLines(color: Colors.transparent),
+                                majorTickLines:
+                                    MajorTickLines(color: Colors.transparent),
+                              ),
                             ),
                           ),
                         ],
