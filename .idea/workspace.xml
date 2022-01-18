@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ceaeda-ba7f-408f-8624-ab7417252be8" name="Default Changelist" comment="provider error">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,5 +100,12 @@
     <MESSAGE value="merge conflict resolved." />
     <MESSAGE value="provider error" />
     <option name="LAST_COMMIT_MESSAGE" value="provider error" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="FlutterRunConfigurationType">
+        <watch expression="_interval" language="Dart" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

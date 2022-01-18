@@ -56,10 +56,10 @@ class BarChart extends StatelessWidget {
             axisLine: AxisLine(color: Colors.transparent),
             majorGridLines: MajorGridLines(width: 0, color: Colors.amber)),
         primaryYAxis: NumericAxis(
-          axisLine: AxisLine(color: Colors.transparent),
-          majorGridLines: MajorGridLines(color: Colors.transparent),
-          majorTickLines: MajorTickLines(color: Colors.transparent),
-        ),
+            axisLine: AxisLine(color: Colors.transparent),
+            majorGridLines: MajorGridLines(color: Colors.transparent),
+            majorTickLines: MajorTickLines(color: Colors.transparent),
+            numberFormat: NumberFormat.compact()),
       ),
     );
   }
