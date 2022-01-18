@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/btc/btc_repository.dart';
@@ -37,11 +39,16 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   Future<void> populate() async {
     requestModel = BTCRequestModel();
     requestModel.symbol = "ETHBTC";
-    requestModel.interval = "15m";
-    requestModel.limit = 100;
+    requestModel.interval = "1m";
+    requestModel.limit = 30;
     _list = await _btcProvider.fetchData(requestModel);
 
     // print(data);
+  }
+
+  double dp(double val, int places) {
+    num mod = pow(10.0, places);
+    return ((val * mod).round().toDouble() / mod);
   }
 
   @override
@@ -84,8 +91,28 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is Success) {
-            var data = state.data as List<BTCChartModel>;
-            print(data);
+            List<BTCChartModel> listData = state.data;
+            int length = listData.length;
+            bool isIncreased;
+            var percentage;
+            String status;
+            if (listData[length - 1].close < listData[length - 2].close) {
+              isIncreased = false;
+              percentage =
+                  (listData[length - 2].close - listData[length - 1].close) /
+                      listData[length - 1].close *
+                      100;
+
+              status = "- " + dp(percentage, 3).toString() + " %";
+            } else {
+              isIncreased = true;
+              percentage =
+                  (listData[length - 1].close - listData[length - 2].close) /
+                      listData[length - 2].close *
+                      100;
+
+              status = "- " + dp(percentage, 3).toString() + " %";
+            }
             return Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -105,9 +132,9 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                     child: Row(
                       children: [
                         Text(
-                          "13,540\$",
+                          "${dp(listData.last.open.toDouble(), 3)}\$",
                           style: TextStyle(
-                              color: Colors.green,
+                              color: isIncreased ? Colors.green : Colors.red,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
@@ -116,12 +143,12 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                         ),
                         Container(
                           height: 30,
-                          width: 70,
+                          padding: EdgeInsets.only(left: 20, right: 20),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Colors.green),
+                              color: isIncreased ? Colors.green : Colors.red),
                           child: Center(
-                            child: Text("+ 11.8%",
+                            child: Text(status,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -244,7 +271,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                               plotAreaBorderColor: Colors.transparent,
                               series: <CandleSeries>[
                                 CandleSeries<BTCChartModel, DateTime>(
-                                  dataSource: data,
+                                  dataSource: listData,
                                   name: '',
                                   xValueMapper: (BTCChartModel sales, _) =>
                                       sales.openTime,
@@ -268,16 +295,12 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                                       MajorTickLines(color: Colors.transparent),
                                   majorGridLines: MajorGridLines(width: 0)),
                               primaryYAxis: NumericAxis(
-                                  minimum: 88,
-                                  maximum: 130,
-                                  interval: 10,
-                                  axisLine: AxisLine(color: Colors.transparent),
-                                  majorGridLines:
-                                      MajorGridLines(color: Colors.white30),
-                                  majorTickLines:
-                                      MajorTickLines(color: Colors.transparent),
-                                  numberFormat: NumberFormat.simpleCurrency(
-                                      decimalDigits: 0)),
+                                axisLine: AxisLine(color: Colors.transparent),
+                                majorGridLines:
+                                    MajorGridLines(color: Colors.white30),
+                                majorTickLines:
+                                    MajorTickLines(color: Colors.transparent),
+                              ),
                             ),
                           ),
 
@@ -298,7 +321,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                               plotAreaBorderColor: Colors.transparent,
                               series: <ChartSeries<BTCChartModel, DateTime>>[
                                 ColumnSeries<BTCChartModel, DateTime>(
-                                    dataSource: data,
+                                    dataSource: listData,
                                     xValueMapper: (BTCChartModel data, _) =>
                                         data.openTime,
                                     yValueMapper: (BTCChartModel data, _) =>
@@ -316,9 +339,6 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                                   majorGridLines: MajorGridLines(
                                       width: 0, color: Colors.amber)),
                               primaryYAxis: NumericAxis(
-                                  minimum: 70,
-                                  maximum: 120,
-                                  interval: 50,
                                   axisLine: AxisLine(color: Colors.transparent),
                                   majorGridLines:
                                       MajorGridLines(color: Colors.transparent),
