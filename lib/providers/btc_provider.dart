@@ -9,7 +9,12 @@ class BTCProvider with ChangeNotifier {
   final BTCRepository btcRepository;
   BTCProvider(this.btcRepository);
 
-  LiveData<UIState<dynamic>> _btcData = LiveData<UIState<dynamic>>();
+  LiveData<UIState<List<BTCChartModel>>> _btcData =
+      LiveData<UIState<List<BTCChartModel>>>();
+
+  LiveData<UIState<List<BTCChartModel>>> getLiveData() {
+    return this._btcData;
+  }
 
   Future<List<BTCChartModel>> fetchData(BTCRequestModel requestModel) async {
     _btcData.setValue(IsLoading());
