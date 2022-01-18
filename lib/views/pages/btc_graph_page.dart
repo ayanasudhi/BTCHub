@@ -36,10 +36,11 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   List intervals = ["15m", "1h", "1d", "1w"];
   String _currentInterval = "15m";
 
-  Future<void> populate() async {
+  Future<void> populate(String interval) async {
     requestModel = BTCRequestModel();
+    _currentInterval = interval;
     requestModel.symbol = "ETHBTC";
-    requestModel.interval = _currentInterval;
+    requestModel.interval = interval;
     requestModel.limit = 40;
     await _btcProvider.fetchData(requestModel);
   }
@@ -47,7 +48,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   @override
   void initState() {
     super.initState();
-    populate();
+    populate(_currentInterval);
     _candleZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
         enablePanning: true,

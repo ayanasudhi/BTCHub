@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class IntervalZoomHeader extends StatelessWidget {
+class IntervalZoomHeader extends StatefulWidget {
   IntervalZoomHeader({
     Key? key,
     required List intervals,
@@ -23,6 +23,18 @@ class IntervalZoomHeader extends StatelessWidget {
   late String _currentInterval;
 
   @override
+  State<IntervalZoomHeader> createState() => _IntervalZoomHeaderState();
+}
+
+class _IntervalZoomHeaderState extends State<IntervalZoomHeader> {
+  late String _interval;
+
+  @override
+  void initState() {
+    _interval = widget._currentInterval;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -36,19 +48,21 @@ class IntervalZoomHeader extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: _intervals.length,
+                itemCount: widget._intervals.length,
                 itemBuilder: (BuildContext ctxt, int index) {
                   return Center(
                     child: Container(
                       margin: EdgeInsets.only(left: 20),
                       child: InkWell(
                         onTap: () {
-                          _currentInterval = _intervals[index];
-                          _populate();
+                          setState(() {
+                            _interval = widget._intervals[index];
+                          });
+                          widget._populate(_interval);
                         },
                         child: Text(
-                          _intervals[index],
-                          style: _currentInterval == _intervals[index]
+                          widget._intervals[index],
+                          style: _interval == widget._intervals[index]
                               ? TextStyle(color: Colors.amber)
                               : TextStyle(color: Colors.white70),
                         ),
@@ -60,8 +74,8 @@ class IntervalZoomHeader extends StatelessWidget {
           //Expanded(child: Container()),
           GestureDetector(
             onTap: () {
-              _candleZoomPanBehavior.zoomIn();
-              _chartZoomPanBehavior.zoomIn();
+              widget._candleZoomPanBehavior.zoomIn();
+              widget._chartZoomPanBehavior.zoomIn();
             },
             child: Container(
               height: 50,
@@ -80,8 +94,8 @@ class IntervalZoomHeader extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              _candleZoomPanBehavior.zoomOut();
-              _chartZoomPanBehavior.zoomOut();
+              widget._candleZoomPanBehavior.zoomOut();
+              widget._chartZoomPanBehavior.zoomOut();
             },
             child: Container(
               height: 50,

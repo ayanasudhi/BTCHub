@@ -53,7 +53,6 @@ class BarChart extends StatelessWidget {
               color: Color(0xFF403F55))
         ],
         primaryXAxis: DateTimeAxis(
-            dateFormat: DateFormat.MMM(),
             axisLine: AxisLine(color: Colors.transparent),
             majorGridLines: MajorGridLines(width: 0, color: Colors.amber)),
         primaryYAxis: NumericAxis(
