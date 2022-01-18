@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'i_api_request_manager.dart';
 
-class DioRequestManager extends IApiRequestManager{
+class DioRequestManager extends IApiRequestManager {
   static final _baseUrl = 'https://api1.binance.com';
   final _connectionTimeout = 50000;
   final _receiveTimeout = 30000;
@@ -20,73 +20,87 @@ class DioRequestManager extends IApiRequestManager{
   void setInterceptor() {
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (RequestOptions options) async {
+        onRequest:
+            (RequestOptions options, RequestInterceptorHandler handler) async {
           options.headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json; charset=UTF-8',
             'accept-charset': 'UTF-8',
           };
-          return options;
+          return handler.next(options);
         },
-        onResponse: (Response response) async {
+        onResponse: (Response response, handler) async {
           print('----->>> $response');
-          return response;
+          return handler.next(response);
         },
-        onError: (DioError e) async {
+        onError: (DioError e, handler) async {
           switch (e.type) {
-            case DioErrorType.CONNECT_TIMEOUT:
-              return DioError(
-                request: e.request,
-                response: e.response,
-                error: "ارتباط اینترنت را بررسی کنید",//CONNECT_TIMEOUT
-              );
+            case DioErrorType.connectTimeout:
+              return handler.next(DioError(
+                  response: e.response,
+                  error: '${e.message}',
+                  requestOptions: RequestOptions(
+                      path:
+                          "") //HandshakeException - SocketException //مشکل در برقراری اینترنت
+                  ));
               break;
-            case DioErrorType.DEFAULT :
-              return DioError(
-                request: e.request,
-                response: e.response,
-                error: '${e.message}'//HandshakeException - SocketException //مشکل در برقراری اینترنت
-              );
+            case DioErrorType.other:
+              return handler.next(DioError(
+                  response: e.response,
+                  error: '${e.message}',
+                  requestOptions: RequestOptions(
+                      path:
+                          "") //HandshakeException - SocketException //مشکل در برقراری اینترنت
+                  ));
               break;
-            case DioErrorType.RECEIVE_TIMEOUT:
-              return DioError(
-                request: e.request,
-                response: e.response,
-                error: "ارتباط اینترنت را بررسی کنید",// RECEIVE_TIMEOUT
-              );
-              break;
-
-            case DioErrorType.CANCEL:
-              return DioError(
-                request: e.request,
-                response: e.response,
-                error: "",// CANCEL
-              );
+            case DioErrorType.receiveTimeout:
+              return handler.next(DioError(
+                  response: e.response,
+                  error: '${e.message}',
+                  requestOptions: RequestOptions(
+                      path:
+                          "") //HandshakeException - SocketException //مشکل در برقراری اینترنت
+                  ));
               break;
 
-            case DioErrorType.SEND_TIMEOUT:
-              return DioError(
-                request: e.request,
-                response: e.response,
-                error: "ارتباط برقرار نشد",//Timeout
-              );
+            case DioErrorType.cancel:
+              return handler.next(DioError(
+                  response: e.response,
+                  error: '${e.message}',
+                  requestOptions: RequestOptions(
+                      path:
+                          "") //HandshakeException - SocketException //مشکل در برقراری اینترنت
+                  ));
               break;
-            case DioErrorType.RESPONSE:
-              return DioError(
-                request: e.request,
-                response: e.response,
-                error: e.response.data["message"],
-              );
+
+            case DioErrorType.sendTimeout:
+              return handler.next(DioError(
+                  response: e.response,
+                  error: '${e.message}',
+                  requestOptions: RequestOptions(
+                      path:
+                          "") //HandshakeException - SocketException //مشکل در برقراری اینترنت
+                  ));
+              break;
+            case DioErrorType.response:
+              return handler.next(DioError(
+                  response: e.response,
+                  error: '${e.message}',
+                  requestOptions: RequestOptions(
+                      path:
+                          "") //HandshakeException - SocketException //مشکل در برقراری اینترنت
+                  ));
               break;
           }
-          return e;
+          return handler.next(e);
         },
       ),
     );
   }
 
   @override
-  Future<dynamic> getRequest({required String path, Map<String, dynamic>? parameters}) async {
+  Future<dynamic> getRequest(
+      {required String path, required Map<String, dynamic> parameters}) async {
     try {
       final response = await _dio.get(path, queryParameters: parameters);
       return response.data;
@@ -96,7 +110,8 @@ class DioRequestManager extends IApiRequestManager{
   }
 
   @override
-  Future<dynamic> postRequest({required String path, Map<String, dynamic>? parameters, body}) async {
+  Future<dynamic> postRequest(
+      {required String path, Map<String, dynamic>? parameters, body}) async {
     try {
       final response = await _dio.post(path, data: body);
       print('------ $response');
@@ -105,12 +120,4 @@ class DioRequestManager extends IApiRequestManager{
       throw FormatException(e.message);
     }
   }
-
-
-
-
-
-
-
-
 }

@@ -2,14 +2,12 @@ import 'dart:collection';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsUtil {
-
   SharedPrefsUtil._();
 
   static final SharedPrefsUtil prefsInstance = SharedPrefsUtil._();
 
   Future<SharedPreferences> _sprefs = SharedPreferences.getInstance();
-  Map<String,dynamic>? _prefsMap;
-
+  Map<String, dynamic>? _prefsMap;
 
   void saveIntToPrefs(String key, int value) async {
     final pref = await _sprefs;
@@ -17,8 +15,7 @@ class SharedPrefsUtil {
     pref.commit();
   }
 
-
-  void saveStringToPrefs(String key, String value) async{
+  void saveStringToPrefs(String key, String value) async {
     final pref = await _sprefs;
     pref.setString(key, value);
     pref.commit();
@@ -30,8 +27,7 @@ class SharedPrefsUtil {
     pref.commit();
   }
 
-
-  Future<String> loadStringFromPref (String key) async {
+  Future<String> loadStringFromPref(String key) async {
     final pref = await _sprefs;
 
     var strValue = pref.getString(key) ?? "";
@@ -39,29 +35,25 @@ class SharedPrefsUtil {
     return strValue;
   }
 
-  Future<int> loadIntFromPref (String key) async {
+  Future<int> loadIntFromPref(String key) async {
     final pref = await _sprefs;
 
     var intValue = pref.getInt(key) ?? -1;
 
     return intValue;
-
   }
 
-  Future<bool> loadBoolFromPref (String key) async {
+  Future<bool?> loadBoolFromPref(String key) async {
     final pref = await _sprefs;
 
-    var boolVal =  pref.getBool(key);
+    var boolVal = pref.getBool(key);
 
     return boolVal;
-
   }
 
-
-  Future<dynamic> loadFromPrefs (String key) async{
-
+  Future<dynamic> loadFromPrefs(String key) async {
     final pref = await _sprefs;
-    _prefsMap =  new HashMap();
+    _prefsMap = new HashMap();
 
     _prefsMap!['UserName'] = pref.get(key) ?? "---";
     _prefsMap!['PassWord'] = pref.get(key) ?? "---";
@@ -72,19 +64,13 @@ class SharedPrefsUtil {
     _prefsMap!['RememberMe'] = pref.get(key) ?? false;
     _prefsMap!['UseBiometric'] = pref.get(key) ?? false;
 
-
-
-
     return _prefsMap![key];
   }
-
-
-
 
 // Hello
   //------------------- prefrence theme methods -------------------------
 
-  Future<String> loadThemeNameFromPref () async {
+  Future<String> loadThemeNameFromPref() async {
     final pref = await _sprefs;
 
     var strValue = pref.getString('ThemeName') ?? "themeA";
@@ -92,16 +78,15 @@ class SharedPrefsUtil {
     return strValue;
   }
 
-  void saveThemeNameToPref({required String themeName}) async{
+  void saveThemeNameToPref({required String themeName}) async {
     final pref = await _sprefs;
     pref.setString('ThemeName', themeName);
     pref.commit();
   }
 
-
   //------------------- prefrence theme methods -------------------------
 
-  Future<String> loadLocaleNameFromPref () async {
+  Future<String> loadLocaleNameFromPref() async {
     final pref = await _sprefs;
 
     var strValue = pref.getString('LocaleName') ?? "fa";
@@ -109,12 +94,9 @@ class SharedPrefsUtil {
     return strValue;
   }
 
-  void saveLocaleNameToPref({required String localeName}) async{
+  void saveLocaleNameToPref({required String localeName}) async {
     final pref = await _sprefs;
     pref.setString('LocaleName', localeName);
     pref.commit();
   }
-
-
-
 }

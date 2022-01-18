@@ -1,11 +1,10 @@
-class BTCChartModel {
-  BTCChartModel({
+class ChartSampleData {
+  ChartSampleData({
     this.x,
     this.open,
     this.close,
     this.low,
     this.high,
-    this.volume,
   });
 
   final DateTime? x;
@@ -13,5 +12,4 @@ class BTCChartModel {
   final num? close;
   final num? low;
   final num? high;
-  final num? volume;
 }
