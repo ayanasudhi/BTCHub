@@ -322,17 +322,30 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                               plotAreaBorderColor: Colors.transparent,
                               series: <ChartSeries<BTCChartModel, DateTime>>[
                                 ColumnSeries<BTCChartModel, DateTime>(
-                                    dataSource: listData,
-                                    xValueMapper: (BTCChartModel data, _) =>
-                                        data.openTime,
-                                    yValueMapper: (BTCChartModel data, _) =>
-                                        data.volume,
-                                    name: 'Gold',
-                                    isVisibleInLegend: false,
-                                    spacing: 0,
-                                    trackPadding: 0,
-                                    width: 0.9,
-                                    color: Color(0xFF403F55))
+                                  dataSource: listData,
+                                  xValueMapper: (BTCChartModel data, _) =>
+                                      data.openTime,
+                                  yValueMapper: (BTCChartModel data, _) =>
+                                      data.volume,
+                                  pointColorMapper:
+                                      (BTCChartModel data, _index) {
+                                    if (_index == 0) {
+                                      return Colors.green;
+                                    } else {
+                                      if (listData[_index].close <
+                                          listData[_index - 1].close) {
+                                        return Colors.red;
+                                      } else {
+                                        return Colors.green;
+                                      }
+                                    }
+                                  },
+                                  name: 'Gold',
+                                  isVisibleInLegend: false,
+                                  spacing: 0,
+                                  trackPadding: 0,
+                                  width: 0.9,
+                                )
                               ],
                               primaryXAxis: DateTimeAxis(
                                   dateFormat: DateFormat.MMM(),

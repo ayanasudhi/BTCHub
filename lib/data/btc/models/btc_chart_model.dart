@@ -1,5 +1,4 @@
-class BTCChartModel
-{
+class BTCChartModel {
   BTCChartModel({
     required this.openTime,
     required this.open,
