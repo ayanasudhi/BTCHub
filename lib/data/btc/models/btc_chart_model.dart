@@ -1,18 +1,18 @@
 class BTCChartModel
 {
   BTCChartModel({
-    this.openTime,
-    this.open,
-    this.close,
-    this.low,
-    this.high,
-    this.volume,
+    required this.openTime,
+    required this.open,
+    required this.high,
+    required this.low,
+    required this.close,
+    required this.volume,
   });
 
-  final DateTime? openTime;
-  final num? open;
-  final num? close;
-  final num? low;
-  final num? high;
-  final num? volume;
+  DateTime openTime;
+  num open;
+  num close;
+  num low;
+  num high;
+  num volume;
 }
