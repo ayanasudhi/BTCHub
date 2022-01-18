@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/data/btc/btc_repository.dart';
+import 'package:flutter_app/data/btc/models/btc_chart_model.dart';
+import 'package:flutter_app/data/btc/models/btc_request_model.dart';
+import 'package:flutter_app/providers/btc_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import '../../core/di/locator.dart';
 import '../../utils/chartSample.dart';
 import '../../utils/populate.dart';
 
@@ -13,6 +19,8 @@ class BTCGraphPage extends StatefulWidget {
 }
 
 class _BTCGraphPageState extends State<BTCGraphPage> {
+  BTCProvider _btcProvider = BTCProvider(locator<BTCRepository>());
+
   late List<ChartSampleData> _chartData;
   late TrackballBehavior _trackballBehavior;
   late ZoomPanBehavior _candleZoomPanBehavior;
@@ -21,8 +29,27 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   List intervals = ["15m", "1h", "1d", "1w"];
   int _cutterntInterval = 0;
 
+  late BTCRequestModel requestModel;
+
+  late List<BTCChartModel> data;
+
+  Future<void> populate() async {
+    requestModel = BTCRequestModel();
+    requestModel.symbol = "";
+    requestModel.interval = "";
+    requestModel.startTime = "";
+    requestModel.endTime = "";
+    requestModel.limit = 100;
+    _btcProvider = Provider.of<BTCProvider>(context, listen: false);
+    data = await _btcProvider.fetchData(requestModel);
+
+    print(data);
+  }
+
   @override
   void initState() {
+    super.initState();
+    populate();
     _chartData = Populate().getChartData();
     _candleZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
@@ -34,7 +61,6 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
         enablePinching: true);
     _trackballBehavior = TrackballBehavior(
         enable: true, activationMode: ActivationMode.singleTap);
-    super.initState();
   }
 
   @override
