@@ -30,7 +30,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   late ZoomPanBehavior _chartZoomPanBehavior;
 
   List intervals = ["15m", "1h", "1d", "1w"];
-  int _cutterntInterval = 0;
+  String _currentInterval = "15m";
 
   late BTCRequestModel requestModel;
 
@@ -39,7 +39,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   Future<void> populate() async {
     requestModel = BTCRequestModel();
     requestModel.symbol = "ETHBTC";
-    requestModel.interval = "1m";
+    requestModel.interval = _currentInterval;
     requestModel.limit = 30;
     _list = await _btcProvider.fetchData(requestModel);
 
@@ -55,7 +55,6 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   void initState() {
     super.initState();
     populate();
-    _chartData = Populate().getChartData();
     _candleZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
         enablePanning: true,
@@ -111,7 +110,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                       listData[length - 2].close *
                       100;
 
-              status = "- " + dp(percentage, 3).toString() + " %";
+              status = "+ " + dp(percentage, 3).toString() + " %";
             }
             return Container(
               width: MediaQuery.of(context).size.width,
@@ -184,13 +183,12 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                                     margin: EdgeInsets.only(left: 20),
                                     child: InkWell(
                                       onTap: () {
-                                        setState(() {
-                                          _cutterntInterval = index;
-                                        });
+                                          _currentInterval = intervals[index];
+                                          populate();
                                       },
                                       child: Text(
                                         intervals[index],
-                                        style: _cutterntInterval == index
+                                        style: _currentInterval == intervals[index]
                                             ? TextStyle(color: Colors.amber)
                                             : TextStyle(color: Colors.white70),
                                       ),
@@ -327,6 +325,19 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                                         data.openTime,
                                     yValueMapper: (BTCChartModel data, _) =>
                                         data.volume,
+                                    pointColorMapper:
+                                        (BTCChartModel data, _index) {
+                                      if (_index == 0) {
+                                        return Colors.green;
+                                      } else {
+                                        if (listData[_index].close <
+                                            listData[_index - 1].close) {
+                                          return Colors.red;
+                                        } else {
+                                          return Colors.green;
+                                        }
+                                      }
+                                    },
                                     name: 'Gold',
                                     isVisibleInLegend: false,
                                     spacing: 0,
