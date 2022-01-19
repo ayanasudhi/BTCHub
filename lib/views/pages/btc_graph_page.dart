@@ -74,111 +74,126 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: ChangeNotifierProvider<BTCProvider>(create: (ctx) {
-        return _btcProvider;
-      }, child: Consumer<BTCProvider>(
-        builder: (ctx, data, _) {
-          var state = data.getLiveData().getValue();
-          if (state is Initial || state is IsLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is Success) {
-            List<BTCChartModel> listData = state.data;
-            int length = listData.length;
-            bool isIncreased;
-            var percentage;
-            String status;
-            if (listData[length - 1].close < listData[length - 2].close) {
-              isIncreased = false;
-              percentage =
-                  (listData[length - 2].close - listData[length - 1].close) /
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+
+            /// Current Price
+            ///
+            ///
+            ChangeNotifierProvider<BTCProvider>(create: (ctx) {
+              return _btcProvider;
+            }, child: Consumer<BTCProvider>(builder: (ctx, data, _) {
+              var state = data.getLiveData().getValue();
+              if (state is Success) {
+                List<BTCChartModel> listData = state.data;
+                int length = listData.length;
+                bool isIncreased;
+                var percentage;
+                String status;
+                if (listData[length - 1].close < listData[length - 2].close) {
+                  isIncreased = false;
+                  percentage = (listData[length - 2].close -
+                          listData[length - 1].close) /
                       listData[length - 1].close *
                       100;
 
-              status = "- " + Utils().dp(percentage, 3).toString() + " %";
-            } else {
-              isIncreased = true;
-              percentage =
-                  (listData[length - 1].close - listData[length - 2].close) /
+                  status = "- " + Utils().dp(percentage, 3).toString() + " %";
+                } else {
+                  isIncreased = true;
+                  percentage = (listData[length - 1].close -
+                          listData[length - 2].close) /
                       listData[length - 2].close *
                       100;
 
-              status = "+ " + Utils().dp(percentage, 3).toString() + " %";
-            }
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
+                  status = "+ " + Utils().dp(percentage, 3).toString() + " %";
+                }
+                return CurrentPrice(
+                    listData: listData,
+                    isIncreased: isIncreased,
+                    status: status);
+              } else {
+                return Container(height: 40,);
+              }
+            })),
 
-                  /// Current Price
-                  ///
-                  ///
-                  CurrentPrice(
-                      listData: listData,
-                      isIncreased: isIncreased,
-                      status: status),
-                  SizedBox(
-                    height: 5,
-                  ),
+            SizedBox(
+              height: 5,
+            ),
 
-                  /// Interval List widget
-                  ///
-                  ///
-                  IntervalZoomHeader(
-                      intervals: intervals,
-                      populate: populate,
-                      candleZoomPanBehavior: _candleZoomPanBehavior,
-                      chartZoomPanBehavior: _chartZoomPanBehavior,
-                      currentInterval: _currentInterval),
-                  SizedBox(
-                    height: 20,
-                  ),
+            /// Interval List widget
+            ///
+            ///
+            IntervalZoomHeader(
+                intervals: intervals,
+                populate: populate,
+                candleZoomPanBehavior: _candleZoomPanBehavior,
+                chartZoomPanBehavior: _chartZoomPanBehavior,
+                currentInterval: _currentInterval),
+            SizedBox(
+              height: 20,
+            ),
 
-                  /// Charts card
-                  ///
-                  ///
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: 30, bottom: 30, right: 10, left: 10),
-                      margin: EdgeInsets.only(),
-                      decoration: BoxDecoration(
-                          color: Color(0xFF2F2F41),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: ListView(
-                        children: [
-                          /// Candle chart
-                          ChandleChart(
-                              trackballBehavior: _trackballBehavior,
-                              candleZoomPanBehavior: _candleZoomPanBehavior,
-                              listData: listData),
+            /// Charts card
+            ///
+            ///
+            Expanded(
+              child: Container(
+                padding:
+                    EdgeInsets.only(top: 30, bottom: 30, right: 10, left: 10),
+                margin: EdgeInsets.only(),
+                decoration: BoxDecoration(
+                    color: Color(0xFF2F2F41),
+                    borderRadius: BorderRadius.circular(30)),
+                child: ChangeNotifierProvider<BTCProvider>(create: (ctx) {
+                  return _btcProvider;
+                }, child: Consumer<BTCProvider>(builder: (ctx, data, _) {
+                  var state = data.getLiveData().getValue();
+                  if (state is Success) {
+                    List<BTCChartModel> listData = state.data;
 
-                          /// Bar chart
-                          BarChart(
-                              chartZoomPanBehavior: _chartZoomPanBehavior,
-                              listData: listData),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                    return ListView(
+                      children: [
+                        /// Candle chart
+                        ChandleChart(
+                            trackballBehavior: _trackballBehavior,
+                            candleZoomPanBehavior: _candleZoomPanBehavior,
+                            listData: listData),
+
+                        /// Bar chart
+                        BarChart(
+                            chartZoomPanBehavior: _chartZoomPanBehavior,
+                            listData: listData),
+                      ],
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                })),
               ),
-            );
-          } else if (state is Failure) {
-            return Center(
-              child: Text('${state.error}'),
-            );
-          } else {
-            return Container();
-          }
-        },
-      )),
+            ),
+          ],
+        ),
+      ),
+
+      //
+      // } else if (state is Failure) {
+      //   return Center(
+      //     child: Text('${state.error}'),
+      //   );
+      // } else {
+      //   return Container();
+      // }
+      //  },
+      // ))
     );
   }
 }
