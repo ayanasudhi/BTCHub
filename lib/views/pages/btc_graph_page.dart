@@ -161,7 +161,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                     return ListView(
                       children: [
                         /// Candle chart
-                        ChandleChart(
+                        CandleChart(
                             trackballBehavior: _trackballBehavior,
                             candleZoomPanBehavior: _candleZoomPanBehavior,
                             listData: listData),

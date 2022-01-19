@@ -4,8 +4,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import '../../data/btc/models/btc_chart_model.dart';
 
-class ChandleChart extends StatelessWidget {
-  const ChandleChart({
+class CandleChart extends StatelessWidget {
+  const CandleChart({
     Key? key,
     required TrackballBehavior trackballBehavior,
     required ZoomPanBehavior candleZoomPanBehavior,
