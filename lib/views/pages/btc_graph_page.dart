@@ -39,9 +39,9 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   Future<void> populate(String interval) async {
     requestModel = BTCRequestModel();
     _currentInterval = interval;
-    requestModel.symbol = "ETHBTC";
+    requestModel.symbol = "ETHUSDT";
     requestModel.interval = interval;
-    requestModel.limit = 40;
+    requestModel.limit = 500;
     await _btcProvider.fetchData(requestModel);
   }
 
@@ -52,13 +52,17 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
     _candleZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
         enablePanning: true,
-        enablePinching: true);
+        enablePinching: true,
+        maximumZoomLevel: 0.5,
+        zoomMode: ZoomMode.x);
     _chartZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
         enablePanning: true,
-        enablePinching: true);
+        enablePinching: true,
+        maximumZoomLevel: 0.5,
+        zoomMode: ZoomMode.x);
     _trackballBehavior = TrackballBehavior(
-        enable: true, activationMode: ActivationMode.singleTap);
+        enable: false, activationMode: ActivationMode.singleTap);
   }
 
   @override
@@ -119,7 +123,9 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                     isIncreased: isIncreased,
                     status: status);
               } else {
-                return Container(height: 40,);
+                return Container(
+                  height: 40,
+                );
               }
             })),
 

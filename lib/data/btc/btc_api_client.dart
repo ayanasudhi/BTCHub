@@ -21,19 +21,14 @@ class BTCApiClient {
           'limit': requestModel.limit
         });
 
-    double cryptoToUSDConversion(String value) {
-      double currentUSDAmount = 3187.74;
-      return double.parse(value) * currentUSDAmount;
-    }
-
     List<List<dynamic>> datas = btcDataModelFromJson(jsonEncode(result));
     for (var data in datas) {
       chartModel.add(BTCChartModel(
           openTime: DateTime.fromMillisecondsSinceEpoch(data[0]),
-          open: cryptoToUSDConversion(data[1]),
-          high: cryptoToUSDConversion(data[2]),
-          low: cryptoToUSDConversion(data[3]),
-          close: cryptoToUSDConversion(data[4]),
+          open: double.parse(data[1]),
+          high: double.parse(data[2]),
+          low: double.parse(data[3]),
+          close: double.parse(data[4]),
           volume: double.parse(data[5])));
     }
     return chartModel;

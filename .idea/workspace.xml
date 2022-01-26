@@ -4,20 +4,27 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26ceaeda-ba7f-408f-8624-ab7417252be8" name="Default Changelist" comment="pull updates">
+    <list default="true" id="26ceaeda-ba7f-408f-8624-ab7417252be8" name="Default Changelist" comment="provider error">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022,_9_35_AM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022__9_35_AM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/btc/btc_api_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/btc/btc_api_client.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/cctech1/.android/avd/Pixel_2_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/user2/.android/avd/Pixel_5_API_30.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -32,6 +39,31 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="ui/omer" />
+                    <option name="lastUsedInstant" value="1643176649" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1643003484" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="ProjectId" id="23rEwNHEvzVNJZRk6l0YVafhm4W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -75,14 +107,7 @@
       <option name="project" value="LOCAL" />
       <updated>1642492494456</updated>
     </task>
-    <task id="LOCAL-00002" summary="pull updates">
-      <created>1642577072304</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1642577072304</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -110,8 +135,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge conflict resolved." />
     <MESSAGE value="provider error" />
-    <MESSAGE value="pull updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="pull updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="provider error" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

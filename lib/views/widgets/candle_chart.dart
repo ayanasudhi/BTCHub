@@ -30,27 +30,63 @@ class CandleChart extends StatelessWidget {
         plotAreaBorderColor: Colors.transparent,
         series: <CandleSeries>[
           CandleSeries<BTCChartModel, DateTime>(
-            dataSource: listData,
-            name: '',
-            xValueMapper: (BTCChartModel sales, _) => sales.openTime,
-            lowValueMapper: (BTCChartModel sales, _) => sales.low,
-            highValueMapper: (BTCChartModel sales, _) => sales.high,
-            openValueMapper: (BTCChartModel sales, _) => sales.open,
-            closeValueMapper: (BTCChartModel sales, _) => sales.close,
-            isVisibleInLegend: false,
-          ),
+              dataSource: listData,
+              // dataLabelSettings: DataLabelSettings(
+              //     isVisible: true,
+              //     textStyle: TextStyle(color: Colors.green),
+              //     alignment: ChartAlignment.far,
+              //     offset: Offset(0, 10),
+              //     borderColor: Colors.purple,
+              //     borderWidth: 2,
+              //     builder: (dynamic data, dynamic point, dynamic series,
+              //         int pointIndex, int seriesIndex) {
+              //       return Container(
+              //         height: 30,
+              //         width: 30,
+              //         color: Colors.blue,
+              //       );
+              //     }),
+              name: '',
+              xValueMapper: (BTCChartModel sales, _) => sales.openTime,
+              lowValueMapper: (BTCChartModel sales, _) => sales.low,
+              highValueMapper: (BTCChartModel sales, _) => sales.high,
+              openValueMapper: (BTCChartModel sales, _) => sales.open,
+              closeValueMapper: (BTCChartModel sales, _) => sales.close,
+              isVisibleInLegend: false,
+              pointColorMapper: (BTCChartModel data, _index) {
+                if (_index == 0) {
+                  return Colors.green;
+                } else {
+                  if (listData[_index].close < listData[_index - 1].close) {
+                    return Colors.red;
+                  } else {
+                    return Colors.green;
+                  }
+                }
+              },
+              dataLabelMapper: (BTCChartModel data, _index) {
+                if (_index == listData.length - 1) {
+                  return data.close.toString();
+                } else {
+                  return "";
+                }
+              }),
         ],
         primaryXAxis: DateTimeAxis(
-            dateFormat: DateFormat.MMM(),
-            labelStyle: TextStyle(color: Colors.transparent),
+            visibleMinimum: listData[listData.length - 30].openTime,
+            visibleMaximum: listData[listData.length - 1].openTime,
             axisLine: AxisLine(color: Colors.white30),
             majorTickLines: MajorTickLines(color: Colors.transparent),
             majorGridLines: MajorGridLines(width: 0)),
         primaryYAxis: NumericAxis(
-            axisLine: AxisLine(color: Colors.transparent),
-            majorGridLines: MajorGridLines(color: Colors.white30),
-            majorTickLines: MajorTickLines(color: Colors.transparent),
-            numberFormat: NumberFormat.simpleCurrency(decimalDigits: 1)),
+          opposedPosition: true,
+          interactiveTooltip: InteractiveTooltip(
+              color: Colors.purple, enable: true, borderWidth: 2),
+          axisLine: AxisLine(color: Colors.transparent),
+          majorGridLines: MajorGridLines(color: Colors.white30),
+          majorTickLines: MajorTickLines(color: Colors.transparent),
+          numberFormat: NumberFormat.simpleCurrency(decimalDigits: 1),
+        ),
       ),
     );
   }
