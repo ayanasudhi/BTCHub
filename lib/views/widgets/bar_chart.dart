@@ -53,13 +53,18 @@ class BarChart extends StatelessWidget {
               color: Color(0xFF403F55))
         ],
         primaryXAxis: DateTimeAxis(
-            axisLine: AxisLine(color: Colors.transparent),
-            majorGridLines: MajorGridLines(width: 0, color: Colors.amber)),
+          visibleMinimum: listData[listData.length - 30].openTime,
+          visibleMaximum: listData[listData.length - 1].openTime,
+          axisLine: AxisLine(color: Colors.transparent),
+          majorGridLines: MajorGridLines(width: 0, color: Colors.amber),
+        ),
         primaryYAxis: NumericAxis(
+            opposedPosition: true,
             axisLine: AxisLine(color: Colors.transparent),
             majorGridLines: MajorGridLines(color: Colors.transparent),
             majorTickLines: MajorTickLines(color: Colors.transparent),
-            numberFormat: NumberFormat.compact()),
+            numberFormat: NumberFormat.compact(),
+            labelsExtent: 40),
       ),
     );
   }
