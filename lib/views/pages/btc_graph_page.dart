@@ -41,7 +41,7 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
     _currentInterval = interval;
     requestModel.symbol = "ETHUSDT";
     requestModel.interval = interval;
-    requestModel.limit = 500;
+    requestModel.limit = 50;
     await _btcProvider.fetchData(requestModel);
   }
 

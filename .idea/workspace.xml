@@ -10,21 +10,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022,_9_35_AM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022__9_35_AM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/btc/btc_api_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/btc/btc_api_client.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/user2/.android/avd/Pixel_5_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/cctech1/.android/avd/Pixel_2_API_30.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -140,7 +137,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="FlutterRunConfigurationType">
-        <watch expression="_interval" language="Dart" />
+        <watch expression="args.visibleMin" language="Dart" />
       </configuration>
     </watches-manager>
   </component>
