@@ -11,7 +11,7 @@ import 'package:flutter_app/views/widgets/interval_zoom_bar.dart';
 import 'package:flutter_app/views/widgets/price_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
+import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../core/di/locator.dart';
 import '../../core/livedata/ui_state.dart';
 import '../widgets/bar_chart.dart';
@@ -24,12 +24,21 @@ class BTCGraphPage extends StatefulWidget {
   _BTCGraphPageState createState() => _BTCGraphPageState();
 }
 
+late TrackballBehavior trackballBehavior;
+late TrackballBehavior bartrackballBehavior;
+late ZoomPanBehavior candleZoomPanBehavior;
+late ZoomPanBehavior chartZoomPanBehavior;
+
+double zoomP = 0.5;
+double zoomF = 0.2;
+double chartZoomP = 0.5;
+double chartZoomF = 0.2;
+
+final cartesianChartKey = GlobalKey<ChandleChartState>();
+final chartKey = GlobalKey<BarChartState>();
+
 class _BTCGraphPageState extends State<BTCGraphPage> {
   BTCProvider _btcProvider = BTCProvider(locator<BTCRepository>());
-
-  late TrackballBehavior _trackballBehavior;
-  late ZoomPanBehavior _candleZoomPanBehavior;
-  late ZoomPanBehavior _chartZoomPanBehavior;
 
   late BTCRequestModel requestModel;
 
@@ -49,19 +58,19 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
   void initState() {
     super.initState();
     populate(_currentInterval);
-    _candleZoomPanBehavior = ZoomPanBehavior(
+    candleZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
         enablePanning: true,
         enablePinching: true,
-        maximumZoomLevel: 0.5,
         zoomMode: ZoomMode.x);
-    _chartZoomPanBehavior = ZoomPanBehavior(
+    chartZoomPanBehavior = ZoomPanBehavior(
         // Enables pinch zooming
         enablePanning: true,
         enablePinching: true,
-        maximumZoomLevel: 0.5,
         zoomMode: ZoomMode.x);
-    _trackballBehavior = TrackballBehavior(
+    trackballBehavior = TrackballBehavior(
+        enable: false, activationMode: ActivationMode.singleTap);
+    bartrackballBehavior = TrackballBehavior(
         enable: false, activationMode: ActivationMode.singleTap);
   }
 
@@ -139,8 +148,6 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
             IntervalZoomHeader(
                 intervals: intervals,
                 populate: populate,
-                candleZoomPanBehavior: _candleZoomPanBehavior,
-                chartZoomPanBehavior: _chartZoomPanBehavior,
                 currentInterval: _currentInterval),
             SizedBox(
               height: 20,
@@ -168,14 +175,10 @@ class _BTCGraphPageState extends State<BTCGraphPage> {
                       children: [
                         /// Candle chart
                         ChandleChart(
-                            trackballBehavior: _trackballBehavior,
-                            candleZoomPanBehavior: _candleZoomPanBehavior,
-                            listData: listData),
+                            key: cartesianChartKey, listData: listData),
 
                         /// Bar chart
-                        BarChart(
-                            chartZoomPanBehavior: _chartZoomPanBehavior,
-                            listData: listData),
+                        BarChart(key: chartKey, listData: listData),
                       ],
                     );
                   } else {

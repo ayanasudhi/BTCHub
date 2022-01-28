@@ -3,17 +3,41 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/btc/models/btc_chart_model.dart';
+import '../pages/btc_graph_page.dart';
 
-class BarChart extends StatelessWidget {
+class BarChart extends StatefulWidget {
   const BarChart({
     Key? key,
-    required ZoomPanBehavior chartZoomPanBehavior,
     required this.listData,
-  })  : _chartZoomPanBehavior = chartZoomPanBehavior,
-        super(key: key);
+  }) : super(key: key);
 
-  final ZoomPanBehavior _chartZoomPanBehavior;
   final List<BTCChartModel> listData;
+
+  @override
+  State<StatefulWidget> createState() {
+    return BarChartState();
+  }
+}
+
+class BarChartState extends State<BarChart> {
+  BarChartState({Key? key});
+  void chartRefresh() {
+    setState(() {});
+  }
+
+  late ZoomPanBehavior _zoomPanBehavior;
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    _zoomPanBehavior = ZoomPanBehavior(
+        enablePanning: true,
+        enablePinching: true,
+        enableDoubleTapZooming: true,
+        zoomMode: ZoomMode.x);
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +50,27 @@ class BarChart extends StatelessWidget {
       child: SfCartesianChart(
         enableAxisAnimation: true,
         legend: Legend(isVisible: true),
-        //trackballBehavior: _trackballBehavior,
-        zoomPanBehavior: _chartZoomPanBehavior,
+        zoomPanBehavior: _zoomPanBehavior,
+        tooltipBehavior: _tooltipBehavior,
+        onZooming: (ZoomPanArgs args) {
+          if (args.axis?.name == 'primaryXAxis') {
+            zoomP = args.currentZoomPosition;
+            zoomF = args.currentZoomFactor;
+            cartesianChartKey.currentState!.refreshChart();
+          }
+        },
         plotAreaBorderColor: Colors.transparent,
         series: <ChartSeries<BTCChartModel, DateTime>>[
           ColumnSeries<BTCChartModel, DateTime>(
-              dataSource: listData,
+              dataSource: widget.listData,
               xValueMapper: (BTCChartModel data, _) => data.openTime,
               yValueMapper: (BTCChartModel data, _) => data.volume,
               pointColorMapper: (BTCChartModel data, _index) {
                 if (_index == 0) {
                   return Colors.green;
                 } else {
-                  if (listData[_index].close < listData[_index - 1].close) {
+                  if (widget.listData[_index].close <
+                      widget.listData[_index - 1].close) {
                     return Colors.red;
                   } else {
                     return Colors.green;
@@ -53,8 +85,11 @@ class BarChart extends StatelessWidget {
               color: Color(0xFF403F55))
         ],
         primaryXAxis: DateTimeAxis(
-          visibleMinimum: listData[listData.length - 30].openTime,
-          visibleMaximum: listData[listData.length - 1].openTime,
+          zoomFactor: zoomF,
+          zoomPosition: zoomP,
+          name: 'primaryXAxis',
+          visibleMinimum: widget.listData[widget.listData.length - 30].openTime,
+          visibleMaximum: widget.listData[widget.listData.length - 1].openTime,
           axisLine: AxisLine(color: Colors.transparent),
           majorGridLines: MajorGridLines(width: 0, color: Colors.amber),
         ),

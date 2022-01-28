@@ -3,20 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import '../../data/btc/models/btc_chart_model.dart';
+import '../pages/btc_graph_page.dart';
 
-class ChandleChart extends StatelessWidget {
+class ChandleChart extends StatefulWidget {
   const ChandleChart({
     Key? key,
-    required TrackballBehavior trackballBehavior,
-    required ZoomPanBehavior candleZoomPanBehavior,
     required this.listData,
-  })  : _trackballBehavior = trackballBehavior,
-        _candleZoomPanBehavior = candleZoomPanBehavior,
-        super(key: key);
+  }) : super(key: key);
 
-  final TrackballBehavior _trackballBehavior;
-  final ZoomPanBehavior _candleZoomPanBehavior;
   final List<BTCChartModel> listData;
+
+  @override
+  State<StatefulWidget> createState() {
+    return ChandleChartState();
+  }
+}
+
+class ChandleChartState extends State<ChandleChart> {
+  ChandleChartState({Key? key});
+  void refreshChart() {
+    setState(() {});
+  }
+
+  late ZoomPanBehavior _zoomPanBehavior;
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    _zoomPanBehavior = ZoomPanBehavior(
+        enablePanning: true,
+        enablePinching: true,
+        enableDoubleTapZooming: true,
+        zoomMode: ZoomMode.x);
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +46,20 @@ class ChandleChart extends StatelessWidget {
       height: MediaQuery.of(context).size.width / 3 * 2,
       child: SfCartesianChart(
         enableAxisAnimation: true,
-        trackballBehavior: _trackballBehavior,
-        zoomPanBehavior: _candleZoomPanBehavior,
+        zoomPanBehavior: _zoomPanBehavior,
+        tooltipBehavior: _tooltipBehavior,
         plotAreaBorderColor: Colors.transparent,
+        onZooming: (ZoomPanArgs args) {
+          if (args.axis?.name == 'primaryXAxis') {
+            zoomP = args.currentZoomPosition;
+            zoomF = args.currentZoomFactor;
+            chartKey.currentState!.chartRefresh();
+          }
+        },
         series: <CandleSeries>[
           CandleSeries<BTCChartModel, DateTime>(
-              dataSource: listData,
+              dataSource: widget.listData,
+              enableTooltip: true,
               // dataLabelSettings: DataLabelSettings(
               //     isVisible: true,
               //     textStyle: TextStyle(color: Colors.green),
@@ -57,7 +86,8 @@ class ChandleChart extends StatelessWidget {
                 if (_index == 0) {
                   return Colors.green;
                 } else {
-                  if (listData[_index].close < listData[_index - 1].close) {
+                  if (widget.listData[_index].close <
+                      widget.listData[_index - 1].close) {
                     return Colors.red;
                   } else {
                     return Colors.green;
@@ -65,7 +95,7 @@ class ChandleChart extends StatelessWidget {
                 }
               },
               dataLabelMapper: (BTCChartModel data, _index) {
-                if (_index == listData.length - 1) {
+                if (_index == widget.listData.length - 1) {
                   return data.close.toString();
                 } else {
                   return "";
@@ -73,13 +103,19 @@ class ChandleChart extends StatelessWidget {
               }),
         ],
         primaryXAxis: DateTimeAxis(
-            visibleMinimum: listData[listData.length - 30].openTime,
-            visibleMaximum: listData[listData.length - 1].openTime,
+            zoomFactor: zoomF,
+            zoomPosition: zoomP,
+            name: 'primaryXAxis',
+            visibleMinimum:
+                widget.listData[widget.listData.length - 30].openTime,
+            visibleMaximum:
+                widget.listData[widget.listData.length - 1].openTime,
             axisLine: AxisLine(color: Colors.white30),
             majorTickLines: MajorTickLines(color: Colors.transparent),
             majorGridLines: MajorGridLines(width: 0)),
         primaryYAxis: NumericAxis(
           opposedPosition: true,
+          labelStyle: TextStyle(color: Colors.green),
           interactiveTooltip: InteractiveTooltip(
               color: Colors.purple, enable: true, borderWidth: 2),
           axisLine: AxisLine(color: Colors.transparent),

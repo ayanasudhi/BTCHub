@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ceaeda-ba7f-408f-8624-ab7417252be8" name="Default Changelist" comment="provider error">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022,_9_35_AM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022__9_35_AM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/btc/btc_api_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/btc/btc_api_client.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/providers/btc_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/btc_provider.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +135,12 @@
     <watches-manager>
       <configuration name="FlutterRunConfigurationType">
         <watch expression="_interval" language="Dart" />
+        <watch expression="args.axis?.name" language="Dart" />
+        <watch expression="args.axis?.name == 'primaryXAxis'" language="Dart" />
+        <watch expression="args.axis!" language="Dart" />
+        <watch expression="args.axis == DateTimeAxis" language="Dart" />
+        <watch expression="args.axis! == DateTimeAxis" language="Dart" />
+        <watch expression="args.axis == DateTimeAxis()" language="Dart" />
       </configuration>
     </watches-manager>
   </component>
