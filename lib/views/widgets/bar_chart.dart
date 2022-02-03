@@ -13,7 +13,7 @@ class BarChart extends StatelessWidget {
         super(key: key);
 
   final ZoomPanBehavior _chartZoomPanBehavior;
-  final List<BTCChartModel> listData;
+  final List<BTCCandleModel> listData;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,12 @@ class BarChart extends StatelessWidget {
         //trackballBehavior: _trackballBehavior,
         zoomPanBehavior: _chartZoomPanBehavior,
         plotAreaBorderColor: Colors.transparent,
-        series: <ChartSeries<BTCChartModel, DateTime>>[
-          ColumnSeries<BTCChartModel, DateTime>(
+        series: <ChartSeries<BTCCandleModel, DateTime>>[
+          ColumnSeries<BTCCandleModel, DateTime>(
               dataSource: listData,
-              xValueMapper: (BTCChartModel data, _) => data.openTime,
-              yValueMapper: (BTCChartModel data, _) => data.volume,
-              pointColorMapper: (BTCChartModel data, _index) {
+              xValueMapper: (BTCCandleModel data, _) => data.openTime,
+              yValueMapper: (BTCCandleModel data, _) => data.volume,
+              pointColorMapper: (BTCCandleModel data, _index) {
                 if (_index == 0) {
                   return Colors.green;
                 } else {

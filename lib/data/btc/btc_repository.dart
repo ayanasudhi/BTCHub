@@ -8,6 +8,6 @@ class BTCRepository {
 
   BTCRepository({required this.btcApiClient});
 
-  Future<List<BTCChartModel>> getBTCData(BTCRequestModel requestModel) async =>
+  Future<List<BTCCandleModel>> getBTCData(BTCRequestModel requestModel) async =>
       await btcApiClient.fetchBTCData(requestModel);
 }

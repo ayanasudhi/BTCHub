@@ -16,7 +16,7 @@ class CandleChart extends StatelessWidget {
 
   final TrackballBehavior _trackballBehavior;
   final ZoomPanBehavior _candleZoomPanBehavior;
-  final List<BTCChartModel> listData;
+  final List<BTCCandleModel> listData;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class CandleChart extends StatelessWidget {
 
         ],
         series: <CandleSeries>[
-          CandleSeries<BTCChartModel, DateTime>(
+          CandleSeries<BTCCandleModel, DateTime>(
               dataSource: listData,
 
               // dataLabelSettings: DataLabelSettings(
@@ -64,14 +64,14 @@ class CandleChart extends StatelessWidget {
                  // ),
 
               name: '',
-              xValueMapper: (BTCChartModel sales, _) => sales.openTime,
-              lowValueMapper: (BTCChartModel sales, _) => sales.low,
-              highValueMapper: (BTCChartModel sales, _) => sales.high,
-              openValueMapper: (BTCChartModel sales, _) => sales.open,
-              closeValueMapper: (BTCChartModel sales, _) => sales.close,
+              xValueMapper: (BTCCandleModel sales, _) => sales.openTime,
+              lowValueMapper: (BTCCandleModel sales, _) => sales.low,
+              highValueMapper: (BTCCandleModel sales, _) => sales.high,
+              openValueMapper: (BTCCandleModel sales, _) => sales.open,
+              closeValueMapper: (BTCCandleModel sales, _) => sales.close,
               isVisibleInLegend: false,
 
-              pointColorMapper: (BTCChartModel data, _index) {
+              pointColorMapper: (BTCCandleModel data, _index) {
                 if (_index == 0) {
                   return Colors.green;
                 } else {

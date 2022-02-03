@@ -6,20 +6,14 @@ class IntervalZoomHeader extends StatefulWidget {
     Key? key,
     required List intervals,
     required Function populate,
-    required ZoomPanBehavior candleZoomPanBehavior,
-    required ZoomPanBehavior chartZoomPanBehavior,
     required String currentInterval,
   })  : _intervals = intervals,
         _populate = populate,
-        _candleZoomPanBehavior = candleZoomPanBehavior,
-        _chartZoomPanBehavior = chartZoomPanBehavior,
         _currentInterval = currentInterval,
         super(key: key);
 
   final List _intervals;
   final Function _populate;
-  final ZoomPanBehavior _candleZoomPanBehavior;
-  final ZoomPanBehavior _chartZoomPanBehavior;
   late String _currentInterval;
 
   @override
@@ -74,8 +68,6 @@ class _IntervalZoomHeaderState extends State<IntervalZoomHeader> {
           //Expanded(child: Container()),
           GestureDetector(
             onTap: () {
-              widget._candleZoomPanBehavior.zoomIn();
-              widget._chartZoomPanBehavior.zoomIn();
             },
             child: Container(
               height: 50,
@@ -94,8 +86,6 @@ class _IntervalZoomHeaderState extends State<IntervalZoomHeader> {
           ),
           GestureDetector(
             onTap: () {
-              widget._candleZoomPanBehavior.zoomOut();
-              widget._chartZoomPanBehavior.zoomOut();
             },
             child: Container(
               height: 50,
