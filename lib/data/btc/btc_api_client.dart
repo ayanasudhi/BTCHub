@@ -11,8 +11,8 @@ class BTCApiClient {
 
   BTCApiClient({required this.requestManager});
 
-  Future<List<BTCChartModel>> fetchBTCData(BTCRequestModel requestModel) async {
-    List<BTCChartModel> chartModel = <BTCChartModel>[];
+  Future<List<BTCCandleModel>> fetchBTCData(BTCRequestModel requestModel) async {
+    List<BTCCandleModel> chartModel = <BTCCandleModel>[];
     final result = await requestManager
         .getRequest(path: '/api/v3/klines', //path after base url,
             parameters: {
@@ -23,7 +23,7 @@ class BTCApiClient {
 
     List<List<dynamic>> datas = btcDataModelFromJson(jsonEncode(result));
     for (var data in datas) {
-      chartModel.add(BTCChartModel(
+      chartModel.add(BTCCandleModel(
           openTime: DateTime.fromMillisecondsSinceEpoch(data[0]),
           open: double.parse(data[1]),
           high: double.parse(data[2]),

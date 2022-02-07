@@ -7,7 +7,7 @@ import '../../utils/utils.dart';
 class CurrentPrice extends StatelessWidget {
   const CurrentPrice({
     Key? key,
-    required List<BTCChartModel> listData,
+    required List<BTCCandleModel> listData,
     required bool isIncreased,
     required String status,
   })  : _isIncreased = isIncreased,
@@ -16,7 +16,7 @@ class CurrentPrice extends StatelessWidget {
         super(key: key);
 
   final bool _isIncreased;
-  final List<BTCChartModel> _listData;
+  final List<BTCCandleModel> _listData;
   final String _status;
 
   @override

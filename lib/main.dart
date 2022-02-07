@@ -1,10 +1,8 @@
-import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/views/pages/btc_graph_page.dart';
 
 import 'core/di/locator.dart';
+import 'views/pages/btc_graph.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +33,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BTCGraphPage(),
+      home: BTCGraph(),
     );
   }
 }

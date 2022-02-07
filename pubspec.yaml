@@ -26,7 +26,7 @@ dependencies:
   dio: ^4.0.4
   shared_preferences: ^2.0.12
   provider: ^6.0.2
-  syncfusion_flutter_charts: ^19.1.59
+  syncfusion_flutter_charts: ^19.4.47
   get_it: ^7.2.0
 
 

@@ -3,119 +3,103 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import '../../data/btc/models/btc_chart_model.dart';
-import '../pages/btc_graph_page.dart';
 
-class ChandleChart extends StatefulWidget {
-  const ChandleChart({
+class CandleChart extends StatelessWidget {
+  const CandleChart({
     Key? key,
+    required TrackballBehavior trackballBehavior,
+    required ZoomPanBehavior candleZoomPanBehavior,
     required this.listData,
-  }) : super(key: key);
+  })  : _trackballBehavior = trackballBehavior,
+        _candleZoomPanBehavior = candleZoomPanBehavior,
+        super(key: key);
 
-  final List<BTCChartModel> listData;
-
-  @override
-  State<StatefulWidget> createState() {
-    return ChandleChartState();
-  }
-}
-
-class ChandleChartState extends State<ChandleChart> {
-  ChandleChartState({Key? key});
-  void refreshChart() {
-    setState(() {});
-  }
-
-  late ZoomPanBehavior _zoomPanBehavior;
-  late TooltipBehavior _tooltipBehavior;
-
-  @override
-  void initState() {
-    _zoomPanBehavior = ZoomPanBehavior(
-        enablePanning: true,
-        enablePinching: true,
-        enableDoubleTapZooming: true,
-        zoomMode: ZoomMode.x);
-    _tooltipBehavior = TooltipBehavior(enable: true);
-    super.initState();
-  }
+  final TrackballBehavior _trackballBehavior;
+  final ZoomPanBehavior _candleZoomPanBehavior;
+  final List<BTCCandleModel> listData;
 
   @override
   Widget build(BuildContext context) {
+    print(listData[listData.length-1].close);
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width / 3 * 2,
       child: SfCartesianChart(
         enableAxisAnimation: true,
-        zoomPanBehavior: _zoomPanBehavior,
-        tooltipBehavior: _tooltipBehavior,
+        trackballBehavior: _trackballBehavior,
+        zoomPanBehavior: _candleZoomPanBehavior,
         plotAreaBorderColor: Colors.transparent,
-        onZooming: (ZoomPanArgs args) {
-          if (args.axis?.name == 'primaryXAxis') {
-            zoomP = args.currentZoomPosition;
-            zoomF = args.currentZoomFactor;
-            chartKey.currentState!.chartRefresh();
-          }
-        },
+        annotations: <CartesianChartAnnotation>[
+          CartesianChartAnnotation(
+              widget:Container(padding: EdgeInsets.all(2), color:listData[listData.length-1].close>listData[listData.length-2].close? Colors.green:Colors.red, margin:EdgeInsets.only(left: 70),
+                  child: Text(listData[listData.length-1].open.toString(),style: TextStyle(color: Colors.white, fontSize: 12),)
+              ),
+              coordinateUnit: CoordinateUnit.point,
+              region: AnnotationRegion.chart,
+              x: listData[listData.length-2].openTime,
+              y: listData[listData.length-2].open
+          ),
+
+        ],
         series: <CandleSeries>[
-          CandleSeries<BTCChartModel, DateTime>(
-              dataSource: widget.listData,
-              enableTooltip: true,
+          CandleSeries<BTCCandleModel, DateTime>(
+              dataSource: listData,
+
               // dataLabelSettings: DataLabelSettings(
               //     isVisible: true,
               //     textStyle: TextStyle(color: Colors.green),
-              //     alignment: ChartAlignment.far,
-              //     offset: Offset(0, 10),
+              //     // alignment: ChartAlignment.far,
+              //     // offset: Offset(0, 10),
               //     borderColor: Colors.purple,
+              //
               //     borderWidth: 2,
-              //     builder: (dynamic data, dynamic point, dynamic series,
-              //         int pointIndex, int seriesIndex) {
-              //       return Container(
-              //         height: 30,
-              //         width: 30,
-              //         color: Colors.blue,
-              //       );
-              //     }),
+                  // builder: (dynamic data, dynamic point, dynamic series,
+                  //     int pointIndex, int seriesIndex) {
+                  //   return Container(
+                  //     height: 30,
+                  //     width: 30,
+                  //     color: Colors.red,
+                  //   );
+                  // }
+                 // ),
+
               name: '',
-              xValueMapper: (BTCChartModel sales, _) => sales.openTime,
-              lowValueMapper: (BTCChartModel sales, _) => sales.low,
-              highValueMapper: (BTCChartModel sales, _) => sales.high,
-              openValueMapper: (BTCChartModel sales, _) => sales.open,
-              closeValueMapper: (BTCChartModel sales, _) => sales.close,
+              xValueMapper: (BTCCandleModel sales, _) => sales.openTime,
+              lowValueMapper: (BTCCandleModel sales, _) => sales.low,
+              highValueMapper: (BTCCandleModel sales, _) => sales.high,
+              openValueMapper: (BTCCandleModel sales, _) => sales.open,
+              closeValueMapper: (BTCCandleModel sales, _) => sales.close,
               isVisibleInLegend: false,
-              pointColorMapper: (BTCChartModel data, _index) {
+
+              pointColorMapper: (BTCCandleModel data, _index) {
                 if (_index == 0) {
                   return Colors.green;
                 } else {
-                  if (widget.listData[_index].close <
-                      widget.listData[_index - 1].close) {
+                  if (listData[_index].close < listData[_index - 1].close) {
                     return Colors.red;
                   } else {
                     return Colors.green;
                   }
                 }
               },
-              dataLabelMapper: (BTCChartModel data, _index) {
-                if (_index == widget.listData.length - 1) {
-                  return data.close.toString();
-                } else {
-                  return "";
-                }
-              }),
+              // dataLabelMapper: (BTCChartModel data, _index) {
+              //   if (_index == listData.length - 1) {
+              //     return data.close.toString();
+              //   } else {
+              //     return "";
+              //   }
+              // }
+              ),
         ],
         primaryXAxis: DateTimeAxis(
-            zoomFactor: zoomF,
-            zoomPosition: zoomP,
-            name: 'primaryXAxis',
-            visibleMinimum:
-                widget.listData[widget.listData.length - 30].openTime,
-            visibleMaximum:
-                widget.listData[widget.listData.length - 1].openTime,
+            visibleMinimum: listData[listData.length - 30].openTime,
+            visibleMaximum: listData[listData.length - 1].openTime,
             axisLine: AxisLine(color: Colors.white30),
             majorTickLines: MajorTickLines(color: Colors.transparent),
+            labelsExtent: 70,
             majorGridLines: MajorGridLines(width: 0)),
         primaryYAxis: NumericAxis(
           opposedPosition: true,
-          labelStyle: TextStyle(color: Colors.green),
           interactiveTooltip: InteractiveTooltip(
               color: Colors.purple, enable: true, borderWidth: 2),
           axisLine: AxisLine(color: Colors.transparent),

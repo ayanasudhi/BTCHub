@@ -9,14 +9,14 @@ class BTCProvider with ChangeNotifier {
   final BTCRepository btcRepository;
   BTCProvider(this.btcRepository);
 
-  LiveData<UIState<List<BTCChartModel>>> _btcData =
-      LiveData<UIState<List<BTCChartModel>>>();
+  LiveData<UIState<List<BTCCandleModel>>> _btcData =
+      LiveData<UIState<List<BTCCandleModel>>>();
 
-  LiveData<UIState<List<BTCChartModel>>> getLiveData() {
+  LiveData<UIState<List<BTCCandleModel>>> getLiveData() {
     return this._btcData;
   }
 
-  Future<List<BTCChartModel>> fetchData(BTCRequestModel requestModel) async {
+  Future<List<BTCCandleModel>> fetchData(BTCRequestModel requestModel) async {
     _btcData.setValue(IsLoading());
     notifyListeners();
     try {

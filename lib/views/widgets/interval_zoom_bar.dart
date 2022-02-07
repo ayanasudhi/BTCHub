@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../pages/btc_graph_page.dart';
-
 class IntervalZoomHeader extends StatefulWidget {
   IntervalZoomHeader({
     Key? key,
@@ -70,8 +68,6 @@ class _IntervalZoomHeaderState extends State<IntervalZoomHeader> {
           //Expanded(child: Container()),
           GestureDetector(
             onTap: () {
-              candleZoomPanBehavior.zoomIn();
-              chartZoomPanBehavior.zoomIn();
             },
             child: Container(
               height: 50,
@@ -90,8 +86,6 @@ class _IntervalZoomHeaderState extends State<IntervalZoomHeader> {
           ),
           GestureDetector(
             onTap: () {
-              candleZoomPanBehavior.zoomOut();
-              chartZoomPanBehavior.zoomOut();
             },
             child: Container(
               height: 50,
