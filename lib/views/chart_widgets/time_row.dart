@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -97,7 +96,8 @@ class _TimeRowState extends State<TimeRow> {
   @override
   Widget build(BuildContext context) {
     int step = _stepCalculator();
-    final dif = widget.candles[0].openTime.difference(widget.candles[step].openTime);
+    final dif =
+        widget.candles[0].openTime.difference(widget.candles[step].openTime);
     return Padding(
       padding: const EdgeInsets.only(right: 51.0),
       child: Stack(
@@ -120,7 +120,7 @@ class _TimeRowState extends State<TimeRow> {
                       color: Theme.of(context).grayColor,
                     ),
                   ),
-                  dif.compareTo(Duration(days: 1)) > 0
+                  dif.abs().compareTo(Duration(days: 1)) > 0
                       ? _monthDayText(
                           _time, Theme.of(context).scaleNumbersColor)
                       : _hourMinuteText(

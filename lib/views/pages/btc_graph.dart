@@ -28,14 +28,27 @@ class _BTCGraphState extends State<BTCGraph> {
   List intervals = ["15m", "1h", "1d", "1w"];
   String _currentInterval = "15m";
 
-
   void populate(String interval) async {
     requestModel = BTCRequestModel();
     _currentInterval = interval;
     requestModel.symbol = "ETHUSDT";
     requestModel.interval = interval;
-    requestModel.limit = 200;
-    await _btcProvider.fetchData(requestModel);
+    requestModel.limit = 1000;
+    await _btcProvider.fetchData(requestModel).then((value) {
+      setState(() {
+        candles.clear();
+        _currentInterval = interval;
+        for (int i = 0; i < value.length; i++) {
+          candles.add(BTCCandleModel(
+              openTime: value[i].openTime,
+              high: value[i].high,
+              low: value[i].low,
+              open: value[i].open,
+              close: value[i].close,
+              volume: value[i].volume));
+        }
+      });
+    });
   }
 
   @override
@@ -115,25 +128,19 @@ class _BTCGraphState extends State<BTCGraph> {
             /// Interval List widget
             ///
             ///
-            IntervalZoomHeader(
-                intervals: intervals,
-                populate: populate,
-                currentInterval: _currentInterval),
-            SizedBox(
-              height: 20,
-            ),
+            // IntervalZoomHeader(
+            //     intervals: intervals,
+            //     populate: populate,
+            //     currentInterval: _currentInterval),
+            // SizedBox(
+            //   height: 20,
+            // ),
 
             /// Charts card
             ///
             ///
             Expanded(
               child: Container(
-                padding:
-                    EdgeInsets.only(top: 30, bottom: 30, right: 10, left: 10),
-                margin: EdgeInsets.only(),
-                decoration: BoxDecoration(
-                    color: Color(0xFF2F2F41),
-                    borderRadius: BorderRadius.circular(30)),
                 child: ChangeNotifierProvider<BTCProvider>(create: (ctx) {
                   return _btcProvider;
                 }, child: Consumer<BTCProvider>(builder: (ctx, data, _) {
@@ -158,7 +165,7 @@ class _BTCGraphState extends State<BTCGraph> {
                     //        return
                     return Candlesticks(
                       onIntervalChange: (String value) async {
-                        //  populate(value);
+                        populate(value);
                       },
                       candles: candles,
                       interval: _currentInterval,

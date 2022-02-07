@@ -78,39 +78,49 @@ class _CandlesticksState extends State<Candlesticks> {
             interval: widget.interval,
             intervals: widget.intervals ?? intervals,
             onIntervalChange: widget.onIntervalChange),
+        SizedBox(
+          height: 10,
+        ),
         Expanded(
           child: TweenAnimationBuilder(
             tween: Tween(begin: 6.toDouble(), end: candleWidth),
             duration: Duration(milliseconds: 300),
             curve: Curves.easeInOutCirc,
             builder: (_, width, __) {
-              return MobileChart(
-                onScaleUpdate: (double scale) {
-                  setState(() {
-                    candleWidth *= scale;
-                    candleWidth = min(candleWidth, 10);
-                    candleWidth = max(candleWidth, 2);
-                    candleWidth.toInt();
-                  });
-                },
-                onPanEnd: () {
-                  lastIndex = index;
-                },
-                onHorizontalDragUpdate: (double x) {
-                  setState(() {
-                    x = x - lastX;
-                    index = lastIndex + x ~/ candleWidth;
-                    index = max(index, -10);
-                    index = min(index, widget.candles.length - 1);
-                  });
-                },
-                onPanDown: (double value) {
-                  lastX = value;
-                  lastIndex = index;
-                },
-                candleWidth: width as double,
-                candles: widget.candles,
-                index: index,
+              return Container(
+                padding:
+                    EdgeInsets.only(top: 30, bottom: 30, right: 10, left: 10),
+                decoration: BoxDecoration(
+                    color: Color(0xFF2F2F41),
+                    borderRadius: BorderRadius.circular(30)),
+                child: MobileChart(
+                  onScaleUpdate: (double scale) {
+                    setState(() {
+                      candleWidth *= scale;
+                      candleWidth = min(candleWidth, 10);
+                      candleWidth = max(candleWidth, 2);
+                      candleWidth.toInt();
+                    });
+                  },
+                  onPanEnd: () {
+                    lastIndex = index;
+                  },
+                  onHorizontalDragUpdate: (double x) {
+                    setState(() {
+                      x = x - lastX;
+                      index = lastIndex + x ~/ candleWidth;
+                      index = max(index, -10);
+                      index = min(index, widget.candles.length - 1);
+                    });
+                  },
+                  onPanDown: (double value) {
+                    lastX = value;
+                    lastIndex = index;
+                  },
+                  candleWidth: width as double,
+                  candles: widget.candles,
+                  index: index,
+                ),
               );
             },
           ),
