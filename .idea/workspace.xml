@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="26ceaeda-ba7f-408f-8624-ab7417252be8" name="Default Changelist" comment="provider error">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/providers/btc_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/btc_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
