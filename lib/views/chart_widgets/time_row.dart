@@ -122,9 +122,9 @@ class _TimeRowState extends State<TimeRow> {
                   ),
                   dif.abs().compareTo(Duration(days: 1)) > 0
                       ? _monthDayText(
-                          _time, Theme.of(context).scaleNumbersColor)
+                          _time, Colors.white)
                       : _hourMinuteText(
-                          _time, Theme.of(context).scaleNumbersColor),
+                          _time, Colors.white),
                 ],
               );
             },

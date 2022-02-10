@@ -9,10 +9,8 @@ import 'package:flutter_app/data/btc/models/btc_request_model.dart';
 import 'package:flutter_app/providers/btc_provider.dart';
 import 'package:flutter_app/utils/utils.dart';
 import 'package:flutter_app/views/chart_widgets/candle_sticks.dart';
-import 'package:flutter_app/views/widgets/interval_zoom_bar.dart';
 import 'package:flutter_app/views/widgets/price_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class BTCGraph extends StatefulWidget {
   const BTCGraph({Key? key}) : super(key: key);
@@ -33,12 +31,12 @@ class _BTCGraphState extends State<BTCGraph> {
     _currentInterval = interval;
     requestModel.symbol = "ETHUSDT";
     requestModel.interval = interval;
-    requestModel.limit = 1000;
+    requestModel.limit = 500;
     await _btcProvider.fetchData(requestModel).then((value) {
       setState(() {
         candles.clear();
         _currentInterval = interval;
-        for (int i = 0; i < value.length; i++) {
+        for (int i = value.length-1; i >=0; i--) {
           candles.add(BTCCandleModel(
               openTime: value[i].openTime,
               high: value[i].high,
@@ -111,7 +109,7 @@ class _BTCGraphState extends State<BTCGraph> {
                   status = "+ " + Utils().dp(percentage, 3).toString() + " %";
                 }
                 return CurrentPrice(
-                    listData: listData,
+                    listData: candles,
                     isIncreased: isIncreased,
                     status: status);
               } else {
@@ -124,18 +122,6 @@ class _BTCGraphState extends State<BTCGraph> {
             SizedBox(
               height: 5,
             ),
-
-            /// Interval List widget
-            ///
-            ///
-            // IntervalZoomHeader(
-            //     intervals: intervals,
-            //     populate: populate,
-            //     currentInterval: _currentInterval),
-            // SizedBox(
-            //   height: 20,
-            // ),
-
             /// Charts card
             ///
             ///
@@ -155,14 +141,6 @@ class _BTCGraphState extends State<BTCGraph> {
                           close: state.data[i].close,
                           volume: state.data[i].volume));
                     }
-                    //List<BTCCandleModel> listData = state.data;
-
-                    // return Center(
-                    //   child: StreamBuilder(
-                    //     stream: state.data,
-                    //     builder: (context, snapshot) {
-                    //        updateCandlesFromSnapshot(state.data);
-                    //        return
                     return Candlesticks(
                       onIntervalChange: (String value) async {
                         populate(value);
@@ -184,46 +162,6 @@ class _BTCGraphState extends State<BTCGraph> {
           ],
         ),
       ),
-
-      //
-      // } else if (state is Failure) {
-      //   return Center(
-      //     child: Text('${state.error}'),
-      //   );
-      // } else {
-      //   return Container();
-      // }
-      //  },
-      // ))
     );
   }
-
-// void updateCandlesFromSnapshot(AsyncSnapshot<Object?> snapshot) {
-//   if (snapshot.data != null) {
-//     final data = jsonDecode(snapshot.data as String) as Map<String, dynamic>;
-//     if (data.containsKey("k") == true &&
-//         candles[0].openTime.millisecondsSinceEpoch == data["k"]["t"]) {
-//       candles[0] = BTCCandleModel(
-//           openTime: candles[0].openTime,
-//           high: double.parse(data["k"]["h"]),
-//           low: double.parse(data["k"]["l"]),
-//           open: double.parse(data["k"]["o"]),
-//           close: double.parse(data["k"]["c"]),
-//           volume: double.parse(data["k"]["v"]));
-//     } else if (data.containsKey("k") == true &&
-//         data["k"]["t"] - candles[0].openTime.millisecondsSinceEpoch ==
-//             candles[0].openTime.millisecondsSinceEpoch -
-//                 candles[1].openTime.millisecondsSinceEpoch) {
-//       candles.insert(
-//           0,
-//           BTCCandleModel(
-//               openTime: DateTime.fromMillisecondsSinceEpoch(data["k"]["t"]),
-//               high: double.parse(data["k"]["h"]),
-//               low: double.parse(data["k"]["l"]),
-//               open: double.parse(data["k"]["o"]),
-//               close: double.parse(data["k"]["c"]),
-//               volume: double.parse(data["k"]["v"])));
-//     }
-//   }
-// }
 }

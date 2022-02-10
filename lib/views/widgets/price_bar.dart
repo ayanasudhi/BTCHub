@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/btc/models/btc_chart_model.dart';
+import 'package:flutter_app/utils/helper_functions.dart';
 
 import '../../utils/utils.dart';
 
@@ -27,7 +28,8 @@ class CurrentPrice extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "${Utils().dp(_listData.last.open.toDouble(), 3)}\$",
+          //  "${Utils().dp(_listData.last.open.toDouble(), 3)}\$",
+            HelperFunctions.priceToString(_listData[0].close),
             style: TextStyle(
                 color: _isIncreased ? Colors.green : Colors.red,
                 fontWeight: FontWeight.bold,

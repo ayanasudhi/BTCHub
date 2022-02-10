@@ -72,7 +72,7 @@ class PriceColumn extends StatelessWidget {
                           Text(
                             "-${HelperFunctions.priceToString(high - priceScale * index)}",
                             style: TextStyle(
-                              color: Theme.of(context).scaleNumbersColor,
+                              color: Colors.white,
                               fontSize: 12,
                             ),
                           ),
