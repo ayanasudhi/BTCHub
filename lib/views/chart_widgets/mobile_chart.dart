@@ -73,6 +73,7 @@ class _MobileChartState extends State<MobileChart> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
+
       builder: (context, constraints) {
         // determine charts width and height
         final double maxWidth = constraints.maxWidth - PRICE_BAR_WIDTH;
@@ -290,7 +291,7 @@ class _MobileChartState extends State<MobileChart> {
                                     color: Theme.of(context)
                                         .hoverIndicatorBackgroundColor,
                                     child: Center(
-                                      child: Text(
+                                        child: Text(
                                         longPressY! < maxHeight * 0.75
                                             ? HelperFunctions.priceToString(
                                                 high -
