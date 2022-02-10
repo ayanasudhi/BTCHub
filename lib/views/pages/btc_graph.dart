@@ -38,7 +38,7 @@ class _BTCGraphState extends State<BTCGraph> {
       setState(() {
         candles.clear();
         _currentInterval = interval;
-        for (int i = 0; i < value.length; i++) {
+        for (int i = value.length - 1; i >= 0; i--) {
           candles.add(BTCCandleModel(
               openTime: value[i].openTime,
               high: value[i].high,
@@ -47,6 +47,7 @@ class _BTCGraphState extends State<BTCGraph> {
               close: value[i].close,
               volume: value[i].volume));
         }
+        //candles = new List.from(candles.reversed);
       });
     });
   }

@@ -11,7 +11,8 @@ class BTCApiClient {
 
   BTCApiClient({required this.requestManager});
 
-  Future<List<BTCCandleModel>> fetchBTCData(BTCRequestModel requestModel) async {
+  Future<List<BTCCandleModel>> fetchBTCData(
+      BTCRequestModel requestModel) async {
     List<BTCCandleModel> chartModel = <BTCCandleModel>[];
     final result = await requestManager
         .getRequest(path: '/api/v3/klines', //path after base url,
