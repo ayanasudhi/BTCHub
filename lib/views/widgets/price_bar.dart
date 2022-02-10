@@ -28,7 +28,6 @@ class CurrentPrice extends StatelessWidget {
       child: Row(
         children: [
           Text(
-          //  "${Utils().dp(_listData.last.open.toDouble(), 3)}\$",
             HelperFunctions.priceToString(_listData[0].close),
             style: TextStyle(
                 color: _isIncreased ? Colors.green : Colors.red,

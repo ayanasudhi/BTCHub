@@ -9,6 +9,10 @@ extension MultiThemeColorExtension on ThemeData {
       ? LightColorPalette.grayColor
       : DarkColorPalette.grayColor;
 
+  Color get primaryColorDark => brightness == Brightness.light
+      ? LightColorPalette.pirmary
+      : DarkColorPalette.pirmary;
+
   Color get background => brightness == Brightness.light
       ? LightColorPalette.background
       : DarkColorPalette.background;

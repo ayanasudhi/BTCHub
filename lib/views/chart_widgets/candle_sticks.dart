@@ -18,7 +18,7 @@ class Candlesticks extends StatefulWidget {
 
   final List<String>? intervals;
 
-   Candlesticks({
+  Candlesticks({
     required this.candles,
     required this.onIntervalChange,
     required this.interval,

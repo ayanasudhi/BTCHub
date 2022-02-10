@@ -36,7 +36,7 @@ class _BTCGraphState extends State<BTCGraph> {
       setState(() {
         candles.clear();
         _currentInterval = interval;
-        for (int i = value.length-1; i >=0; i--) {
+        for (int i = value.length - 1; i >= 0; i--) {
           candles.add(BTCCandleModel(
               openTime: value[i].openTime,
               high: value[i].high,
@@ -122,6 +122,7 @@ class _BTCGraphState extends State<BTCGraph> {
             SizedBox(
               height: 5,
             ),
+
             /// Charts card
             ///
             ///

@@ -27,7 +27,7 @@ class HelperFunctions {
         : price > 100
             ? price.toStringAsFixed(1)
             : price > 10
-                ? price.toStringAsFixed(2)
-                : price.toStringAsFixed(4);
+                ? price.toStringAsFixed(1)
+                : price.toStringAsFixed(1);
   }
 }

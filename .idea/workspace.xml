@@ -5,19 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ceaeda-ba7f-408f-8624-ab7417252be8" name="Default Changelist" comment="fetch changes, color updates">
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/constants/view_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants/view_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/theme/color_palette.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/theme/color_palette.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/theme/theme_data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/theme/theme_data.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/helper_functions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/helper_functions.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/network_image_ssl.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/route_transitions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/shared_prefs_util.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/chart_widgets/candle_sticks.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/chart_widgets/candle_sticks.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/chart_widgets/mobile_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/chart_widgets/mobile_chart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/chart_widgets/price_column.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/chart_widgets/price_column.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/chart_widgets/time_row.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/chart_widgets/time_row.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/chart_widgets/web_chart.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/pages/btc_graph.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/pages/btc_graph_page.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/bar_chart.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/candle_chart.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/widgets/interval_zoom_bar.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/widgets/price_bar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +29,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/cctech1/.android/avd/Pixel_2_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/user2/.android/avd/Pixel_5_API_30.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
